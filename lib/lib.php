@@ -79,19 +79,61 @@ class NumberController{
         	$this->type = 'Whole Number';
         	  
         }else{
-        	$this->type = 'NULL';
+        	$this->type = 'null';
         }
 	}
 	#
 	final function checkUnit(){
 		#
-		if(strlen($this->number) <= 1){
-        	$this->power_ten = '10*P0';
+		if(strlen($this->number) == 1 && strpos($this->number, ".") == false){
+        	$this->power_ten = '10 p 0';
         	$this->engineering_notation = '1';
         	$this->short_scale = 'One';
         	$this->long_scale = 'One';
         	$this->si_symbol = '';
         	$this->si_prefix = '';
+        }elseif(strlen($this->number) == 2 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -1';
+        	$this->engineering_notation = '100 x 10 p -3 ';
+        	$this->short_scale = 'Tenth';
+        	$this->long_scale = 'Tenth';
+        	$this->si_symbol = 'd';
+        	$this->si_prefix = 'deci-';	
+        }elseif(strlen($this->number) == 3 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -2';
+        	$this->engineering_notation = '10 x 10 p -3 ';
+        	$this->short_scale = 'Hundredth';
+        	$this->long_scale = 'Hundredth';
+        	$this->si_symbol = 'c';
+        	$this->si_prefix = 'centi-';	
+        }elseif(strlen($this->number) == 4 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -3';
+        	$this->engineering_notation = '1 x 10 p -3 ';
+        	$this->short_scale = 'Thousandth';
+        	$this->long_scale = 'Thousandth';
+        	$this->si_symbol = 'm';
+        	$this->si_prefix = 'milli-';	
+        }elseif(strlen($this->number) == 5 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -4';
+        	$this->engineering_notation = '100 x 10 p -6 ';
+        	$this->short_scale = 'Ten Thousandth';
+        	$this->long_scale = 'Ten Thousandth';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';	
+        }elseif(strlen($this->number) == 6 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -5';
+        	$this->engineering_notation = '10 x 10 p -6 ';
+        	$this->short_scale = 'Hundred Thousandth';
+        	$this->long_scale = 'Hundred Thousandth';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';
+        }elseif(strlen($this->number) == 7 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -6';
+        	$this->engineering_notation = '1 x 10 p -6 ';
+        	$this->short_scale = 'Millionth';
+        	$this->long_scale = 'Millionth';
+        	$this->si_symbol = 'u';
+        	$this->si_prefix = 'micro-';							
         }else{
         	$this->power_ten = 'null';
         	$this->engineering_notation = 'null';

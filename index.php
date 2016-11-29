@@ -13,6 +13,8 @@ $numsort = new numsort;
 $numbers = [3,
             1000,
             2.5,
-            1/2];
+            1/2,
+            11,
+            1000000];
 echo  $numsort->sortNumber($numbers);
 ?>
