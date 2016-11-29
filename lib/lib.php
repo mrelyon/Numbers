@@ -18,6 +18,8 @@ class NumberController{
 	var $long_scale;
 	var $si_symbol;
 	var $si_prefix;
+	var $odd;
+	var $even;
 	var $final_numbers;
 	var $numbers_out;
 	#
@@ -29,27 +31,27 @@ class NumberController{
 		#	
 		$this->number = $val;
 		#
-		if(!NumberController::checkValue() == true){
-		   NumberController::returnError($this->number. " is not a number");	
+		if(!self::checkValue() == true){
+		   self::returnError($this->number. " is not a number");	
 		} 
         # de assemble number for analysis
         # number type
-        if($this->number <= 10){
-           $this->type = 'Natural Number';
-        }else{
-        	$this->type = 'NULL';
-        }
+        self::checkType();
         # number unit
-        if(strlen($this->number) <= 1){
-        	$this->unit = 'One';
-        }else{
-        	$this->type = 'NULL';	
-        }
+        self::checkUnit();
 		#
 		$this->final_numbers = array();
 		$this->final_numbers['number'] = $this->number;
 		$this->final_numbers['type'] = $this->type;
 		$this->final_numbers['unit'] = $this->unit;
+		$this->final_numbers['power_ten'] = $this->power_ten;
+		$this->final_numbers['engineering_notation'] = $this->engineering_notation;
+		$this->final_numbers['short_scale'] = $this->short_scale;
+		$this->final_numbers['long_scale'] = $this->long_scale;
+		$this->final_numbers['si_symbol'] = $this->si_symbol;
+		$this->final_numbers['si_prefix'] = $this->si_prefix;
+		$this->final_numbers['odd'] = $this->odd;
+		$this->final_numbers['even'] = $this->even;
 		$this->numbers_out[] = $this->final_numbers;
 		#
 	    }
@@ -69,6 +71,23 @@ class NumberController{
 	final function returnError($error){
 		#
 		die($error);
+	}
+	# type of number
+	final function checkType(){
+		if($this->number <= 10){
+           $this->type = 'Natural Number';
+        }else{
+        	$this->type = 'NULL';
+        }
+	}
+	#
+	final function checkUnit(){
+		#
+		if(strlen($this->number) <= 1){
+        	$this->unit = 'One';
+        }else{
+        	$this->type = 'NULL';	
+        }
 	}
 }
 
