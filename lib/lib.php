@@ -43,7 +43,6 @@ class NumberController{
 		$this->final_numbers = array();
 		$this->final_numbers['number'] = $this->number;
 		$this->final_numbers['type'] = $this->type;
-		$this->final_numbers['unit'] = $this->unit;
 		$this->final_numbers['power_ten'] = $this->power_ten;
 		$this->final_numbers['engineering_notation'] = $this->engineering_notation;
 		$this->final_numbers['short_scale'] = $this->short_scale;
@@ -84,13 +83,19 @@ class NumberController{
 	final function checkUnit(){
 		#
 		if(strlen($this->number) <= 1){
-        	$this->unit = 'One';
         	$this->power_ten = '10*P0';
         	$this->engineering_notation = '1';
+        	$this->short_scale = 'One';
+        	$this->long_scale = 'One';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';
         }else{
-        	$this->unit = 'null';	
         	$this->power_ten = 'null';
         	$this->engineering_notation = 'null';
+        	$this->short_scale = 'null';
+        	$this->long_scale = 'null';
+        	$this->si_symbol = 'null';
+        	$this->si_prefix = 'null';
         }
 	}
 }
