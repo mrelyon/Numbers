@@ -25,6 +25,8 @@ class NumberController{
 	#
 	final function sortNumber($n){
 		#
+		$num_nature = new SortNumberNatureController();
+		#
 		$this->numbers_out = array();
 		#
 		foreach ($n as $key => $val) {
@@ -36,9 +38,9 @@ class NumberController{
 		} 
         # de assemble number for analysis
         # number type
-        self::checkType();
+        $num_nature->checkType();
         # number unit
-        self::checkUnit();
+        $num_nature->checkUnit();
 		#
 		$this->final_numbers = array();
 		$this->final_numbers['number'] = $this->number;
@@ -71,6 +73,10 @@ class NumberController{
 		#
 		die($error);
 	}
+}
+
+
+	class SortNumberNatureController extends NumberController{
 	# type of number
 	final function checkType(){
 		if($this->number <= 10 && strpos($this->number, ".") == false){
@@ -143,6 +149,6 @@ class NumberController{
         	$this->si_prefix = 'null';
         }
 	}
-}
+    }
 
 ?>
