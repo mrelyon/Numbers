@@ -73,8 +73,11 @@ class NumberController{
 	}
 	# type of number
 	final function checkType(){
-		if($this->number <= 10){
+		if($this->number <= 10 && strpos($this->number, ".") == false){
            $this->type = 'Natural Number';
+        }elseif($this->number > 10 && $this->number <= 1000000000000000000 && strpos($this->number, ".") == false) {
+        	$this->type = 'Whole Number';
+        	  
         }else{
         	$this->type = 'NULL';
         }
