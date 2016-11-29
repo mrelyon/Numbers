@@ -85,8 +85,12 @@ class NumberController{
 		#
 		if(strlen($this->number) <= 1){
         	$this->unit = 'One';
+        	$this->power_ten = '10*P0';
+        	$this->engineering_notation = '1';
         }else{
-        	$this->type = 'NULL';	
+        	$this->unit = 'null';	
+        	$this->power_ten = 'null';
+        	$this->engineering_notation = 'null';
         }
 	}
 }
