@@ -15,6 +15,8 @@ $numbers = [3,
             2.5,
             1/2,
             11,
-            1000000];
+            1000000,
+            10000000,
+            20000000];
 echo  $numsort->sortNumber($numbers);
 ?>

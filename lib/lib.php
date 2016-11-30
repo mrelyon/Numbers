@@ -20,12 +20,15 @@ class NumberController{
 	var $si_prefix;
 	var $odd;
 	var $even;
+	var $roman_figure;
+	var $arabic_figure;
+	var $chinese_figure;
+	var $value_in_word;
+	var $about;
 	var $final_numbers;
 	var $numbers_out;
 	#
 	final function sortNumber($n){
-		#
-		$num_nature = new SortNumberNatureController();
 		#
 		$this->numbers_out = array();
 		#
@@ -33,14 +36,14 @@ class NumberController{
 		#	
 		$this->number = $val;
 		#
-		if(!self::checkValue() == true){
-		   self::returnError($this->number. " is not a number");	
+		if(!$this->checkValue() == true){
+		   $this->returnError($this->number. " is not a number");	
 		} 
         # de assemble number for analysis
         # number type
-        $num_nature->checkType();
+        $this->checkType();
         # number unit
-        $num_nature->checkUnit();
+        $this->checkUnit();
 		#
 		$this->final_numbers = array();
 		$this->final_numbers['number'] = $this->number;
@@ -53,6 +56,11 @@ class NumberController{
 		$this->final_numbers['si_prefix'] = $this->si_prefix;
 		$this->final_numbers['odd'] = $this->odd;
 		$this->final_numbers['even'] = $this->even;
+		$this->final_numbers['roman_figure'] = $this->roman_figure;
+		$this->final_numbers['arabic_figure'] = $this->arabic_figure;
+		$this->final_numbers['chinese_figure'] = $this->chinese_figure;
+		$this->final_numbers['value_in_word'] = $this->value_in_word;
+		$this->final_numbers['about'] = $this->about;
 		$this->numbers_out[] = $this->final_numbers;
 		#
 	    }
@@ -73,10 +81,7 @@ class NumberController{
 		#
 		die($error);
 	}
-}
 
-
-	class SortNumberNatureController extends NumberController{
 	# type of number
 	final function checkType(){
 		if($this->number <= 10 && strpos($this->number, ".") == false){
@@ -139,7 +144,49 @@ class NumberController{
         	$this->short_scale = 'Millionth';
         	$this->long_scale = 'Millionth';
         	$this->si_symbol = 'u';
-        	$this->si_prefix = 'micro-';							
+        	$this->si_prefix = 'micro-';		
+        }elseif(strlen($this->number) == 8 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -7';
+        	$this->engineering_notation = '100 x 10 p -6 ';
+        	$this->short_scale = 'Ten Millionth';
+        	$this->long_scale = 'Ten Millionth';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';	
+        }elseif(strlen($this->number) == 9 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -8';
+        	$this->engineering_notation = '10 x 10 p -6 ';
+        	$this->short_scale = 'Hundred Millionth';
+        	$this->long_scale = 'Hundred Millionth';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';	
+        }elseif(strlen($this->number) == 10 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -9';
+        	$this->engineering_notation = '1 x 10 p -9 ';
+        	$this->short_scale = 'Billionth';
+        	$this->long_scale = 'Milliardth';
+        	$this->si_symbol = 'n';
+        	$this->si_prefix = 'nano-';	
+        }elseif(strlen($this->number) == 11 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -10';
+        	$this->engineering_notation = '100 x 10 p -9 ';
+        	$this->short_scale = 'Ten Billionth';
+        	$this->long_scale = 'Ten Milliardth';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';
+        }elseif(strlen($this->number) == 12 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -11';
+        	$this->engineering_notation = '1 x 10 p -9 ';
+        	$this->short_scale = 'Hundred Billionth';
+        	$this->long_scale = 'Hundred Milliardth';
+        	$this->si_symbol = '';
+        	$this->si_prefix = '';		
+        }elseif(strlen($this->number) == 13 && strpos($this->number, ".") == false){
+            $this->power_ten = '10 p -12';
+        	$this->engineering_notation = '1 x 10 p -12 ';
+        	$this->short_scale = 'Trillionth';
+        	$this->long_scale = 'Billionth';
+        	$this->si_symbol = 'p';
+        	$this->si_prefix = 'pico-';												
         }else{
         	$this->power_ten = 'null';
         	$this->engineering_notation = 'null';
@@ -149,6 +196,7 @@ class NumberController{
         	$this->si_prefix = 'null';
         }
 	}
-    }
+ 
+}
 
 ?>
